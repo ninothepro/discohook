@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook</title>
+</head>
+<body>
+    <h1></h1>
+
+    <script>
+        // Define the message and webhook URL
+        const message = 'Hello from the automated webhook!';
+        const webhookURL = 'https://discord.com/api/webhooks/1270691776289837101/71nLBF0nDcmbjIyk30HrhDjbW7VbNsLGo4YE7qJ_2PTKfxqBsjr_OKYbAUz6XqC5UsWr';
+
+        // Function to send the message
+        function sendMessage() {
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: message })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                document.body.innerHTML += '<p>Message sent successfully!</p>';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.body.innerHTML += `<p>Error sending message: ${error.message}</p>`;
+            });
+        }
+
+        // Send the message when the page loads
+        window.onload = sendMessage;
+    </script>
+</body>
+</html>
