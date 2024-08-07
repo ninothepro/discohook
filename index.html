@@ -6,20 +6,15 @@
     <title>Discord Webhook</title>
 </head>
 <body>
-    <h1>Sending Message to Discord...</h1>
+    <h1> </h1>
 
     <script>
-        // Function to extract the message from the URL query parameters
-        function getMessageFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const message = urlParams.get('message');
-            return message;
-        }
+        // Define the message and webhook URL
+        const message = 'Hello from the automated webhook!';
+        const webhookURL = 'https://discord.com/api/webhooks/1270691776289837101/71nLBF0nDcmbjIyk30HrhDjbW7VbNsLGo4YE7qJ_2PTKfxqBsjr_OKYbAUz6XqC5UsWr';
 
         // Function to send the message
-        function sendMessage(message) {
-            const webhookURL = 'https://discord.com/api/webhooks/1270691776289837101/71nLBF0nDcmbjIyk30HrhDjbW7VbNsLGo4YE7qJ_2PTKfxqBsjr_OKYbAUz6XqC5UsWr';
-
+        function sendMessage() {
             fetch(webhookURL, {
                 method: 'POST',
                 headers: {
@@ -44,14 +39,7 @@
         }
 
         // Send the message when the page loads
-        window.onload = () => {
-            const message = getMessageFromURL();
-            if (message) {
-                sendMessage(message);
-            } else {
-                document.body.innerHTML += '<p>No message found in URL.</p>';
-            }
-        };
+        window.onload = sendMessage;
     </script>
 </body>
 </html>
